@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    
+    <!-- Use Flask's url_for to dynamically link the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            /* Use Flask's url_for to dynamically reference the background image */
+            background: url('{{ url_for('static', filename='heart.jpg') }}') no-repeat center center fixed:
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        /* Overlay for dimmed effect */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 500px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: rgba(223, 218, 218, 0.9); /* Light transparent background */
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2980b9;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .form-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .form-icon img {
+            width: 80px;
+            height: 80px;
+        }
+
+        form label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #34495e;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #e74c3c;
+            color: rgb(253, 249, 249);
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #77d5ec;
+            margin: 20px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="form-icon">
+            <!-- Use Flask's url_for to dynamically reference the icon image -->
+            <img src="{{ url_for('static', filename='heartlogo.jpg') }}" alt="Heart Icon">
+        </div>
+        <h2>Heart Disease Prediction</h2>
+        <form action="{{ url_for('predict') }}" method="post">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="sex">Sex (1 = Male, 0 = Female):</label>
+            <input type="number" id="sex" name="sex" required>
+
+            <label for="cp">Chest Pain Type:</label>
+            <input type="number" id="cp" name="cp" required>
+
+            <label for="trestbps">Resting Blood Pressure:</label>
+            <input type="number" id="trestbps" name="trestbps" required>
+
+            <label for="chol">Serum Cholesterol:</label>
+            <input type="number" id="chol" name="chol" required>
+
+            <label for="fbs">Fasting Blood Sugar (1 = True, 0 = False):</label>
+            <input type="number" id="fbs" name="fbs" required>
+
+            <label for="restecg">Resting ECG Results:</label>
+            <input type="number" id="restecg" name="restecg" required>
+
+            <label for="thalach">Maximum Heart Rate Achieved:</label>
+            <input type="number" id="thalach" name="thalach" required>
+
+            <label for="exang">Exercise Induced Angina (1 = Yes, 0 = No):</label>
+            <input type="number" id="exang" name="exang" required>
+
+            <label for="oldpeak">ST Depression Induced by Exercise:</label>
+            <input type="number" step="0.1" id="oldpeak" name="oldpeak" required>
+
+            <label for="slope">Slope of Peak Exercise ST Segment:</label>
+            <input type="number" id="slope" name="slope" required>
+
+            <label for="ca">Number of Major Vessels (0-3):</label>
+            <input type="number" id="ca" name="ca" required>
+
+            <label for="thal">Thalassemia (3 = Normal, 6 = Fixed Defect, 7 = Reversible Defect):</label>
+            <input type="number" id="thal" name="thal" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        <hr>
+        <footer>
+            &copy; 2024 Heart Disease Prediction System. All Rights Reserved.
+        </footer>
+    </div>
+</body>
+</html>
